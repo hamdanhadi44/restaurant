@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="container">
+        
+
+        <form id="bookForm" method="post" >
+            <div class="form-group">
+                <label for="Title">Book Title</label>
+                <input type="text" id="TitleInput" name="Title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Genre">Genre</label>
+                <input type="text" id="GenreInput" name="Genre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Author">Book Author</label>
+                <input type="text" id="AuthorInput" name="Author" required>
+            </div>
+            <div class="form-group">
+                <label for="Price">Price</label>
+                <input type="number" id="PriceInput" name="Price" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Rating">Rating</label>
+                <input type="number" id="RatingInput" name="Rating" min="1" max="5" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <textarea id="DescriptionInput" name="Description" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="ImageUrl">Image Url</label>
+                <textarea id="ImageUrlInput" name="ImageUrl" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="Quantity">Quantity</label>
+                <input type="number" id="QuantityInput" name="Quantity" min="1" max="5" required></input>
+            </div>
+            <script>
+                const supabaseUrl = 'https://pcmdrclvowkywgzjwzda.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjbWRyY2x2b3dreXdnemp3emRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDM1NzIxMTksImV4cCI6MjAxOTE0ODExOX0.oj1PziGJ9pP6wUNWEBlLKMVBKVPCI3PK9YkTA49D0RE';
+                const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+                async function insert() {
+                    const quantity = document.getElementById('QuantityInput').value;
+
+                    for(let i=1;i<=quantity;i++){
+                    const title = document.getElementById('TitleInput').value;
+                    const genre = document.getElementById('GenreInput').value;
+                    const author = document.getElementById('AuthorInput').value;
+                    const price = document.getElementById('PriceInput').value;
+                    const rating = document.getElementById('RatingInput').value;
+                    const description = document.getElementById('DescriptionInput').value;
+                    const imageUrl = document.getElementById('ImageUrlInput').value;
+
+                    const { data, error } = await _supabase
+                        .from('Stock') // Replace 'your_table_name' with the actual table name
+                        .insert([
+                            {
+                            Title: title,
+                            Author: author,
+                            Description:description,
+                            Price:price,
+                            Rating:rating,
+                            ImageUrl:imageUrl,
+                            Genre: genre,
+                            },
+                        ]);
+
+                                    if (error) {
+                            console.error('Error inserting data:', error.message);
+                        } else {
+                            console.log('Data inserted successfully:', data);
+                            // Optionally, reset form fields or provide user feedback
+                        }
+                    
+                    }}
+                
+
+                            
+
+                </script>
+                
+            <button type="button" onclick="insert()">Submit</button>
+            
+        </form>
+    </div>
+
+</body>
+</html>

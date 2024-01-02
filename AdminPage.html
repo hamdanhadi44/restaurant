@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Admin</h1>
+
+        <button onclick="navigateTo('AddStocks')">Add Books</button>
+        <button onclick="navigateTo('viewSalesPage')">View Sales</button>
+        <button onclick="navigateTo('removeBooksPage')">Remove Books</button>
+        <button onclick="navigateTo('addBooksToSalesPage')">Add Books to Sales</button>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page + '.html';
+        }
+    </script>
+</body>
+</html>
